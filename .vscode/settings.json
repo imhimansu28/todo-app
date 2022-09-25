@@ -1,0 +1,10 @@
+{
+    "python.formatting.provider": "autopep8",
+    "cSpell.words": [
+        "allauth",
+        "SOCIALACCOUNT",
+        "todoapp",
+        "todolist",
+        "todoproject"
+    ]
+}

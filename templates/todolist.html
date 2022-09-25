@@ -1,0 +1,74 @@
+{% extends 'base.html' %}
+{% block title %} {{request.user.username}} {% endblock title %} 
+
+{% block content %}
+<div class="box">
+    <h1>Add Task </h1>    
+    <div class="card card-form">
+        
+        <form action="/addTodo/" method="post">{% csrf_token %}
+            <input type="text" name="content" placeholder="Enter task here.." required>
+            
+            <input type="date" name="end_date" value="2022-09-24"
+                    min="2022-09-24" max="2023-12-31">
+            <input type="time" name="time" help="field is not required">
+
+            <input type="submit" value="Add +">
+        </form>
+    </div>
+
+    <div class="task-list">
+        <h2 class="h2">My To Do List</h2>
+        <div class="card table-card">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Status Bar:</th>
+                        <th class="primary">Active Task</th>
+                        <th class="danger">Pending-Task</th>
+                        <th class="success">Complete Task</th>
+                        <th>Total Task:</th>
+                        <th>{{count}}</th>
+                    </tr>
+                </thead>
+            </table>
+        </div>
+        {% for tsk in task %}
+        <div class="card card-list row">
+            {% if tsk.completed %}
+            <div class="col">
+                <h3 class="h3">
+                    Task: {{forloop.counter}} 
+                    | <span class="blue"> Start Date: {{tsk.create_date|date:'d m Y'}}</span> 
+                    | <span class="red">Start Date: {{tsk.create_date|date:'d m Y'}}</span>
+                    | <span class="blue">End time: {{tsk.time|time:'h:i'}} </span>
+                </h3>
+                <br>
+                <p>{{tsk.content}} |<a href="{% url 'delete' tsk.id %}">Delete</a> </p>
+            </div>
+            {% else %}
+            <div class="col">
+                <h3 class="h3">
+                    Task: {{forloop.counter}} 
+                    | <span class="blue"> Start Date: {{tsk.create_date|date:'d m Y'}}</span> 
+                    | <span class="red">Start Date: {{tsk.create_date|date:'d m Y'}}</span>
+                    | <span class="blue">End time: {{tsk.time|time:'h:i'}} </span>
+                </h3>
+                <br>
+                <p>{{tsk.content}} |<a href="{% url 'delete' tsk.id %}">Delete</a> </p>
+            </div>
+            <div class="col">
+                <form action="{% url 'task_completed' tsk.id %}" method="post">
+                    {% csrf_token %}
+                    <input type="checkbox" name="completed" value="True">
+                    <input type="submit" value="save">
+                </form>
+            </div>
+            {% endif %}
+
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock content %}
+

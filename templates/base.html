@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TodoTask: {% block title %}{% endblock title %}</title>
+</head>
+<style>
+    body{
+        background-color: #ccc;
+    }
+    .danger{
+        color: red;
+    }
+    .success{
+        color:green;
+    }
+    .primary{
+        color:blue;
+    }
+    .box {
+        left:50%;
+        top:50%;
+        transform: translate(-50%, -50%);
+        position: absolute;
+        width: 712px;
+        max-width:100%;
+    }
+    .card{
+        background-color: #fafafa;
+        padding: 16px;
+        margin: 16px;
+        border: 1px solid #aaa;
+        box-shadow: 4px 4px 8px #aaa;
+    }
+    .card-form input{
+        padding: 5px;
+        margin: 5px;
+        width: 70%;
+        border: 1px solid #070123;
+        box-shadow: 0px 0px 5px #aaa;
+    }
+    .card-form input[type=submit], .btn{
+        background-color: #070123;
+        color: #fafafa;
+        text-transform: uppercase;
+        width: 20%;
+        padding:12px;
+    }
+    .card-form input[type=text]{
+        background-color: #fff;
+        text-transform: capitalize;
+        height: 40px;
+    }
+    ::placeholder{
+        color: #070123;
+        text-transform: capitalize;
+    }
+    h1, .h2{
+        margin: 16px;
+        color: rgb(6, 9, 55);
+        font-size:24px;
+    }
+    .card-list{
+       padding: 10px;
+    }
+    .card-list > p {
+        font-size:18px;
+    }
+
+    h3, p{
+        padding: 0px;
+        margin: 0px;
+    }
+    .footer{
+        top:95%;
+        left:57%;
+        transform: translate(-95%, -57%);
+        position:absolute;
+        
+    }
+    .footer > p {
+        color:#5c3222;
+        font-size: 16px;
+        line-height: 1.4;
+        letter-spacing: 0px;
+        align-text: center;
+    }
+    nav > ul {
+        display:flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        
+    }
+    
+    li{
+        list-style-type: none;
+    }
+    .blue, .red{
+        font-size: 12px;
+    }
+    .blue{
+        color:blue;
+    }
+    .red{
+        color:red;
+    }
+    .table-card{
+        padding: 0px;
+    }
+    table {
+        border:1px solid black;
+        border-collapse:collapse;
+        border-spacing:0px;
+        width:100%;
+        margin:0px;
+    }
+    table tr th{
+        border:1px solid black;
+        width:16.66%;
+        padding: 5px;
+    }
+</style>
+<body>
+    <div class="nav">
+        <nav>
+            <ul>
+               {% if request.user.is_authenticated %}
+               <li class="btn1"><a href="{% url 'logout' %}">Logout</a></li>
+               {% endif %}
+               <li><h1>Welcome : {{request.user.username}} </h1></li>
+            </ul>
+
+        </nav>
+    </div>
+    <main class="container">
+        {% block content %}
+
+        {% endblock content %}
+    </main>
+    <div class="footer">
+        <p>
+            Copyright &copy; By: <a href="http://imhimansu28.github.io/">Himanshu Gupta</a> 2022.
+        </p>
+    </div>
+</body>
+</html>
